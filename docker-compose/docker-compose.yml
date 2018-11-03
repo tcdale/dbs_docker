@@ -7,6 +7,7 @@ networks:
 services:
   dbs-db:
     image: postgres:11-alpine
+    container_name: dbs-db
     ports: 
       - "5432:5432"
     networks: 
@@ -21,8 +22,9 @@ services:
       - POSTGRES_PASSWORD=dbs_password
       - POSTGRES_DB=dbs_db
 
-  dbs-core-php:
+  dbs-core:
     image: tomdale55/dbs-core
+    container_name: dbs-core
     networks: 
       - dbs-network
     depends_on: 
@@ -40,23 +42,25 @@ services:
 
   dbs-snapper:
     image: tomdale55/dbs-snapper
+    container_name: dbs-snapper
     networks: 
       - dbs-network
     depends_on: 
       - dbs-db
-      - dbs-core-php
+      - dbs-core
     volumes:
       - /root/dbs/code/dbs_snapper:/opt/dbs-snapper
       - /root/dbs/logs:/var/log/dbs-snapper
     entrypoint: /opt/dbs-snapper/dbs.php     
 
-  dbs-core-web:
+  dbs-web:
     image: nginx:alpine
+    container_name: dbs-web
     networks: 
       - dbs-network
     depends_on: 
       - dbs-db
-      - dbs-core-php
+      - dbs-core
     ports:
       - "80:80"
     working_dir: /var/www/html/dbs/public

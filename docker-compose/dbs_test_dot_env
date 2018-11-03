@@ -4,7 +4,7 @@ APP_LOG_LEVEL=debug
 APP_KEY=base64:IYjSC4furaF9FyWwusOxQ77xc+z9bB1guJJ/eV7y0iE=
 
 DB_CONNECTION=pgsql
-DB_HOST=dockercompose_dbs-db_1
+DB_HOST=dbs-db
 DB_PORT=5432
 DB_DATABASE=dbs_db
 DB_USERNAME=dbs_user

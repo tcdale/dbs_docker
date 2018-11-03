@@ -22,7 +22,7 @@ services:
       - POSTGRES_DB=dbs_db
 
   dbs-core-php:
-    image: datawerks/dbs:core-php
+    image: tomdale55/dbs-core
     networks: 
       - dbs-network
     depends_on: 
@@ -39,7 +39,7 @@ services:
       - /root/dbs/code/dbs/app/Http/Controllers:/var/www/html/dbs/app/Http/Controllers
 
   dbs-snapper:
-    image: datawerks/dbs:snapper
+    image: tomdale55/dbs-snapper
     networks: 
       - dbs-network
     depends_on: 

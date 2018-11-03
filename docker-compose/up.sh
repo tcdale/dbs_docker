@@ -23,18 +23,17 @@ message 'Compose Down'
 docker-compose down
 message 'Delete old dbs-database files'
 rm -rf /var/lib/docker/volumes/dbs_db/*
-#wait 5
 #
 # Start system
 #
 message 'Compose create'
 docker-compose up --force-recreate -d
-
-
+#
+# Check logs
+#
 docker-compose logs
 #
 # Build database schema
-# - need a better test
 #
 message "Gen new appication key"
 run_core_artisan_cmd key:generate

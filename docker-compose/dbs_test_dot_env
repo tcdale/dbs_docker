@@ -1,7 +1,7 @@
 APP_ENV=local
 APP_DEBUG=true
 APP_LOG_LEVEL=debug
-APP_KEY=base64:sM8e5Num2fho4A0x/TgAI5VKQAGUK6E7dXnjFEtkLEU=
+APP_KEY=base64:IYjSC4furaF9FyWwusOxQ77xc+z9bB1guJJ/eV7y0iE=
 
 DB_CONNECTION=pgsql
 DB_HOST=dockercompose_dbs-db_1

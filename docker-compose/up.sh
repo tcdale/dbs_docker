@@ -20,7 +20,8 @@ function run_core_artisan_cmd {
 # Shutdown and Clean up first
 #
 message 'Compose Down'
-COMPOSE_FILE='/root/dbs/code/dbs_docker/docker-compose/docker-compose.yml'
+COMPOSE_DIR='/root/dbs/code/dbs_docker/docker-compose'
+COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
 docker-compose -f $COMPOSE_FILE down
 message 'Delete old dbs-database files'
 rm -rf /var/lib/docker/volumes/dbs_db/*
@@ -46,7 +47,7 @@ run_core_artisan_cmd key:generate
 message "Copy application key and password to the snapper for decrypt"
 APP_KEY=`run_core_cmd "grep APP_KEY .env"`
 APP_KEY=`echo "$APP_KEY" | awk '{split($0,a,"="); print a[2]}'`
-REPO_PASSWORD=`grep dbs_password docker-compose.yml`
+REPO_PASSWORD=`grep dbs_password $COMPOSE_FILE`
 REPO_PASSWORD=`echo "$REPO_PASSWORD" | awk '{split($0,a,"="); print a[2]}'`
 message "APP_KEY : $APP_KEY"
 message "DB PW   : $REPO_PASSWORD"

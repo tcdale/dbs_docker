@@ -24,6 +24,10 @@ docker-compose down
 message 'Delete old dbs-database files'
 rm -rf /var/lib/docker/volumes/dbs_db/*
 #
+# Set exec on files
+#
+chmod 700 /root/dbs/code/dbs_snapper/*.php
+#
 # Start system
 #
 message 'Compose create'

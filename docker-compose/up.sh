@@ -11,7 +11,7 @@ function wait {
     done   
 }
 function run_core_cmd {
-    docker exec dockercompose_dbs-core-php_1 $1
+    docker exec dbs-core $1
 }
 function run_core_artisan_cmd {
     run_core_cmd "php artisan $1"
@@ -20,7 +20,8 @@ function run_core_artisan_cmd {
 # Shutdown and Clean up first
 #
 message 'Compose Down'
-docker-compose down
+COMPOSE_FILE='/root/dbs/code/dbs_docker/docker-compose/docker-compose.yml'
+docker-compose -f $COMPOSE_FILE down
 message 'Delete old dbs-database files'
 rm -rf /var/lib/docker/volumes/dbs_db/*
 #
@@ -31,11 +32,11 @@ chmod 700 /root/dbs/code/dbs_snapper/*.php
 # Start system
 #
 message 'Compose create'
-docker-compose up --force-recreate -d
+docker-compose -f $COMPOSE_FILE up --force-recreate -d
 #
 # Check logs
 #
-docker-compose logs
+docker-compose -f $COMPOSE_FILE logs
 #
 # Build database schema
 #
@@ -49,11 +50,12 @@ REPO_PASSWORD=`grep dbs_password docker-compose.yml`
 REPO_PASSWORD=`echo "$REPO_PASSWORD" | awk '{split($0,a,"="); print a[2]}'`
 message "APP_KEY : $APP_KEY"
 message "DB PW   : $REPO_PASSWORD"
-docker exec -i dockercompose_dbs-snapper_1 bash -c "echo '$APP_KEY' > app_key.txt"
-docker exec -i dockercompose_dbs-snapper_1 bash -c "echo '$REPO_PASSWORD' > repo_pw.txt"
+DBS_SNAPPER='dbs-snapper'
+docker exec -i $DBS_SNAPPER bash -c "echo '$APP_KEY' > app_key.txt"
+docker exec -i $DBS_SNAPPER bash -c "echo '$REPO_PASSWORD' > repo_pw.txt"
 
 message "Build schema"
 run_core_artisan_cmd migrate
 message "Restart Snapper now database created"
-docker restart dockercompose_dbs-snapper_1
+docker restart $DBS_SNAPPER
 message "Done"

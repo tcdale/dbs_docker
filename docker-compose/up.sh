@@ -25,6 +25,8 @@ COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
 docker-compose -f $COMPOSE_FILE down
 message 'Delete old dbs-database files'
 rm -rf /var/lib/docker/volumes/dbs_db/*
+message 'Clear old logs'
+rm -rf /root/dbs/logs/*.log
 #
 # Set exec on files
 #
@@ -34,10 +36,6 @@ chmod 700 /root/dbs/code/dbs_snapper/*.php
 #
 message 'Compose create'
 docker-compose -f $COMPOSE_FILE up --force-recreate -d
-#
-# Check logs
-#
-docker-compose -f $COMPOSE_FILE logs
 #
 # Build database schema
 #
@@ -59,4 +57,13 @@ message "Build schema"
 run_core_artisan_cmd migrate
 message "Restart Snapper now database created"
 docker restart $DBS_SNAPPER
+#
+# Check logs
+#
+docker-compose -f $COMPOSE_FILE logs
+#
+# Laravel version
+#
+message "Laravel Version"
+run_core_artisan_cmd --version
 message "Done"

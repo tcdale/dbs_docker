@@ -1,7 +1,8 @@
-version: "3"
+version: "3.5"
 
 networks:
   dbs-network:
+    name: dbs-network
     driver: bridge
 
 services:
@@ -32,13 +33,13 @@ services:
     volumes:
       - ./dbs_test_dot_env:/var/www/html/dbs/.env
       - /root/dbs/code/dbs/public/index.php:/var/www/html/dbs/public/index.php
-      - /root/dbs/code/dbs/public/phpinfo.php:/var/www/html/dbs/public/phpinfo.php
       - /root/dbs/code/dbs/routes:/var/www/html/dbs/routes
       - /root/dbs/code/dbs/resources:/var/www/html/dbs/resources
       - /root/dbs/code/dbs/database/migrations:/var/www/html/dbs/database/migrations
       - /root/dbs/code/dbs/app/Classes:/var/www/html/dbs/app/Classes
       - /root/dbs/code/dbs/app/sql:/var/www/html/dbs/app/sql
       - /root/dbs/code/dbs/app/Http/Controllers:/var/www/html/dbs/app/Http/Controllers
+      - /root/dbs/code/dbs/app/Console/Kernel.php:/var/www/html/dbs/app/Console/Kernel.php
 
   dbs-snapper:
     image: tomdale55/dbs-snapper

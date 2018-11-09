@@ -1,7 +1,7 @@
 APP_ENV=local
 APP_DEBUG=true
 APP_LOG_LEVEL=debug
-APP_KEY=base64:oyjx8dZCxoyzGkngZ6d15zSVy0Pylf85fhxkrmT+zFM=
+APP_KEY=base64:CuLSo/IXaco7KIz3C2GoZYLGmqRWbdTAhm3aXqsP4oY=
 
 DB_CONNECTION=pgsql
 DB_HOST=dbs-db

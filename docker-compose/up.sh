@@ -21,7 +21,13 @@ function run_core_artisan_cmd {
 #
 message 'Compose Down'
 COMPOSE_DIR='/root/dbs/code/dbs_docker/docker-compose'
-COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
+if [ $1 == "php-rc" ]; then
+  echo "using php 7.3 rc"
+  COMPOSE_FILE="${COMPOSE_DIR}/docker-compose-php-rc.yml"
+else
+  COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
+fi
+
 docker-compose -f $COMPOSE_FILE down
 message 'Delete old dbs-database files'
 rm -rf /var/lib/docker/volumes/dbs_db/*
@@ -62,8 +68,10 @@ docker restart $DBS_SNAPPER
 #
 docker-compose -f $COMPOSE_FILE logs
 #
-# Laravel version
+# Versions
 #
-message "Laravel Version"
+message "Laravel :"
 run_core_artisan_cmd --version
+message "PHP :"
+run_core_cmd "php -version"
 message "Done"

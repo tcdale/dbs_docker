@@ -16,17 +16,22 @@ function run_core_cmd {
 function run_core_artisan_cmd {
     run_core_cmd "php artisan $1"
 }
+
 #
-# Shutdown and Clean up first
+# What compose file?
 #
-message 'Compose Down'
 COMPOSE_DIR='/root/dbs/code/dbs_docker/docker-compose'
 if [ $1 == "php-rc" ]; then
-  echo "using php 7.3 rc"
+  message "using php 7.3 rc"
   COMPOSE_FILE="${COMPOSE_DIR}/docker-compose-php-rc.yml"
 else
   COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
 fi
+message "Compose file : ${COMPOSE_FILE}"
+#
+# Shutdown and Clean up first
+#
+message 'Compose Down'
 
 docker-compose -f $COMPOSE_FILE down
 message 'Delete old dbs-database files'

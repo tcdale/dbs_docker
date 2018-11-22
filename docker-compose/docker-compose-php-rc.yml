@@ -24,7 +24,7 @@ services:
       - POSTGRES_DB=dbs_db
 
   dbs-core:
-    image: tomdale55/dbs-core-rc
+    image: tomdale55/dbs-core-php7.3
     container_name: dbs-core
     networks: 
       - dbs-network

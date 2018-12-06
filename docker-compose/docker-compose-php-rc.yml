@@ -50,6 +50,7 @@ services:
       - dbs-db
       - dbs-core
     volumes:
+      - ./sqlnet.ora:/usr/lib/oracle/18.3/client64/lib/network/admin/sqlnet.ora
       - /root/dbs/code/dbs_snapper:/opt/dbs-snapper
       - /root/dbs/logs:/var/log/dbs-snapper
     entrypoint: /opt/dbs-snapper/dbs.php     

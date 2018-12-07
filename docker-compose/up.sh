@@ -21,12 +21,13 @@ function run_core_artisan_cmd {
 # What compose file?
 #
 COMPOSE_DIR='/root/dbs/code/dbs_docker/docker-compose'
-if [ $1 == "php-rc" ]; then
+#if [ $1 == "php-7" ]; then
+#  message "using php 7.2"
+#  COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
+#else
   message "using php 7.3 rc"
   COMPOSE_FILE="${COMPOSE_DIR}/docker-compose-php-rc.yml"
-else
-  COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
-fi
+#fi
 message "Compose file : ${COMPOSE_FILE}"
 #
 # Shutdown and Clean up first
@@ -61,8 +62,8 @@ REPO_PASSWORD=`echo "$REPO_PASSWORD" | awk '{split($0,a,"="); print a[2]}'`
 message "APP_KEY : $APP_KEY"
 message "DB PW   : $REPO_PASSWORD"
 DBS_SNAPPER='dbs-snapper'
-docker exec -i $DBS_SNAPPER bash -c "echo '$APP_KEY' > app_key.txt"
-docker exec -i $DBS_SNAPPER bash -c "echo '$REPO_PASSWORD' > repo_pw.txt"
+docker exec -i $DBS_SNAPPER bash -c "echo '$APP_KEY' > .app_key.txt"
+docker exec -i $DBS_SNAPPER bash -c "echo '$REPO_PASSWORD' > .repo_pw.txt"
 
 message "Build schema"
 run_core_artisan_cmd migrate

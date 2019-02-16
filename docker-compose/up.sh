@@ -21,13 +21,8 @@ function run_core_artisan_cmd {
 # What compose file?
 #
 COMPOSE_DIR='/root/dbs/code/dbs_docker/docker-compose'
-#if [ $1 == "php-7" ]; then
-#  message "using php 7.2"
-#  COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
-#else
-  message "using php 7.3 rc"
-  COMPOSE_FILE="${COMPOSE_DIR}/docker-compose-php-rc.yml"
-#fi
+COMPOSE_FILE="${COMPOSE_DIR}/docker-compose-php.yml"
+
 message "Compose file : ${COMPOSE_FILE}"
 #
 # Shutdown and Clean up first

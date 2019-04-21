@@ -21,7 +21,7 @@ function run_core_artisan_cmd {
 # What compose file?
 #
 COMPOSE_DIR='/root/dbs/code/dbs_docker/docker-compose'
-COMPOSE_FILE="${COMPOSE_DIR}/docker-compose-php.yml"
+COMPOSE_FILE="${COMPOSE_DIR}/docker-compose.yml"
 
 message "Compose file : ${COMPOSE_FILE}"
 #

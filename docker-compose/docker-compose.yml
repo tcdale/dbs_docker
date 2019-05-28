@@ -32,6 +32,7 @@ services:
       - dbs-db
     volumes:
       - ./dbs_test_dot_env:/var/www/html/dbs/.env
+      - /root/dbs/code/dbs/app/support_files/wait_for_db_then_migrate.php:/var/www/html/dbs/wait_for_db_then_migrate.php
       - /root/dbs/code/dbs/public/index.php:/var/www/html/dbs/public/index.php
       - /root/dbs/code/dbs/routes:/var/www/html/dbs/routes
       - /root/dbs/code/dbs/resources:/var/www/html/dbs/resources
@@ -49,11 +50,11 @@ services:
     depends_on: 
       - dbs-db
       - dbs-core
+    entrypoint: /opt/dbs-snapper/dbs.php  
     volumes:
       - ./sqlnet.ora:/usr/lib/oracle/18.3/client64/lib/network/admin/sqlnet.ora
       - /root/dbs/code/dbs_snapper:/opt/dbs-snapper
-      - /root/dbs/logs:/var/log/dbs-snapper
-    entrypoint: /opt/dbs-snapper/dbs.php     
+      - /root/dbs/logs:/var/log/dbs-snapper   
 
   dbs-web:
     image: nginx:alpine

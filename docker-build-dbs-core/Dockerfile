@@ -42,5 +42,9 @@ RUN \
 WORKDIR /var/www/html/dbs
 
 RUN \
+  chgrp -R www-data storage bootstrap/cache && \
+  chmod -R ug+rwx storage bootstrap/cache
+
+RUN \
   /usr/local/bin/php -m && \
   /usr/local/bin/php -version

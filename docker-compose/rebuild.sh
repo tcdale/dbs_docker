@@ -16,7 +16,6 @@ function run_core_cmd {
 function run_core_artisan_cmd {
     run_core_cmd "php artisan $1"
 }
-
 #
 # What compose file?
 #
@@ -60,14 +59,7 @@ DBS_SNAPPER='dbs-snapper'
 docker exec -i $DBS_SNAPPER bash -c "echo '$APP_KEY' > .app_key.txt"
 docker exec -i $DBS_SNAPPER bash -c "echo '$REPO_PASSWORD' > .repo_pw.txt"
 
-message "Build schema"
-run_core_artisan_cmd migrate
-message "Restart Snapper now database created"
-docker restart $DBS_SNAPPER
-#
-# Check logs
-#
-docker-compose -f $COMPOSE_FILE logs
+run_core_cmd "php wait_for_db_then_migrate.php"
 #
 # Versions
 #

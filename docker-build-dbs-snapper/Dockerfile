@@ -36,6 +36,7 @@ RUN     yum -y update \
         php70w-mysql \
         php70w-pgsql \
         php70w-pdo_pgsql \
+        php70w-pdo_dblib \
         php70w-pdo \
         php70w-mbstring \
         php70w-xml \

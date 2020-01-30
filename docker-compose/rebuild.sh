@@ -42,6 +42,7 @@ chmod 700 /root/dbs/code/dbs_snapper/*.php
 #
 message 'Compose create'
 docker-compose -f $COMPOSE_FILE up --force-recreate -d
+run_core_cmd "composer update --no-scripts"
 #
 # Build database schema
 #

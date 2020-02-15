@@ -37,6 +37,8 @@ rm -rf /root/dbs/logs/*.log
 # Set exec on files
 #
 chmod 700 /root/dbs/code/dbs_snapper/*.php
+chmod 700 /root/dbs/code/dbs/app/support_files/dbs_scheduler.sh
+chmod 700 /root/dbs/code/dbs/app/support_files/*.php
 #
 # Start system
 #
@@ -59,8 +61,15 @@ message "DB PW   : $REPO_PASSWORD"
 DBS_SNAPPER='dbs-snapper'
 docker exec -i $DBS_SNAPPER bash -c "echo '$APP_KEY' > .app_key.txt"
 docker exec -i $DBS_SNAPPER bash -c "echo '$REPO_PASSWORD' > .repo_pw.txt"
-
+#
+# Run the migration when the database is ready
+#
 run_core_cmd "php wait_for_db_then_migrate.php"
+#
+# Fix permission
+#
+run_core_cmd "chmod -R 775 storage"
+run_core_cmd "chmod -R 775 bootstrap/cache"
 #
 # Versions
 #
@@ -69,3 +78,5 @@ run_core_artisan_cmd --version
 message "PHP :"
 run_core_cmd "php -version"
 message "Done"
+message "Add to crontab now please"
+message "*   * * * * /root/dbs/code/dbs/app/support_files/dbs_scheduler.sh > /root/dbs/logs/dbs_scheduler.log 2>&1"

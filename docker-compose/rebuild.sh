@@ -68,8 +68,9 @@ run_core_cmd "php wait_for_db_then_migrate.php"
 #
 # Fix permission
 #
-run_core_cmd "chmod -R 775 storage"
-run_core_cmd "chmod -R 775 bootstrap/cache"
+run_core_cmd "chmod -R 775 /var/www/html/dbs/storage"
+run_core_cmd "chmod -R 775 /var/www/html/dbs/bootstrap/cache"
+run_core_cmd "rm -f /var/www/html/dbs/storage/logs/*.log"
 #
 # Versions
 #

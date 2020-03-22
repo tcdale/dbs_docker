@@ -41,6 +41,7 @@ services:
       - /root/dbs/code/dbs/app/sql:/var/www/html/dbs/app/sql
       - /root/dbs/code/dbs/app/Http/Controllers:/var/www/html/dbs/app/Http/Controllers
       - /root/dbs/code/dbs/app/Console/Kernel.php:/var/www/html/dbs/app/Console/Kernel.php
+      - /root/dbs/logs/core:/var/www/html/dbs/storage/logs
 
   dbs-snapper:
     image: tomdale55/dbs-snapper
@@ -54,7 +55,7 @@ services:
     volumes:
       - ./sqlnet.ora:/usr/lib/oracle/18.3/client64/lib/network/admin/sqlnet.ora
       - /root/dbs/code/dbs_snapper:/opt/dbs-snapper
-      - /root/dbs/logs:/var/log/dbs-snapper   
+      - /root/dbs/logs/agent:/var/log/dbs-snapper   
 
   dbs-web:
     image: nginx:alpine
@@ -76,6 +77,7 @@ services:
       - /root/dbs/code/dbs/public/plugs:/var/www/html/dbs/public/plugs
       - /root/dbs/code/dbs/public/fonts:/var/www/html/dbs/public/fonts
       - /root/dbs/code/dbs/public/favicon.ico:/var/www/html/dbs/public/favicon.ico
+      - /root/dbs/logs/web:/var/log/nginx
 
 
 

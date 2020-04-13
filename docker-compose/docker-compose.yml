@@ -8,6 +8,11 @@ networks:
 services:
   dbs-db:
     image: postgres:alpine
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
     container_name: dbs-db
     ports: 
       - "5432:5432"
@@ -25,6 +30,11 @@ services:
 
   dbs-core:
     image: tomdale55/dbs-core
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
     container_name: dbs-core
     networks: 
       - dbs-network
@@ -45,6 +55,11 @@ services:
 
   dbs-snapper:
     image: tomdale55/dbs-snapper
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
     container_name: dbs-snapper
     networks: 
       - dbs-network
@@ -59,6 +74,11 @@ services:
 
   dbs-web:
     image: nginx:alpine
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
     container_name: dbs-web
     networks: 
       - dbs-network

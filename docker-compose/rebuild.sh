@@ -44,9 +44,24 @@ chmod 700 /root/dbs/code/dbs/app/support_files/*.php
 #
 message 'Compose create'
 docker-compose -f $COMPOSE_FILE up --force-recreate -d
-run_core_cmd "composer update --no-scripts"
+
 #
-# Build database schema
+# Needs to be in image
+#
+message 'install laravel/ui needed for auth - should be in dokcer image'
+run_core_cmd "composer require laravel/ui"
+#run_core_artisan_cmd ui:auth
+
+#
+# Check for updates
+#
+message 'update all laravel components'
+run_core_cmd "composer update --no-scripts"
+
+
+#
+# New application key
+# the key with image needs replacing
 #
 message "Gen new appication key"
 run_core_artisan_cmd key:generate

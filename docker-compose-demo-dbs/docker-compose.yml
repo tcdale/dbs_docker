@@ -1,0 +1,24 @@
+version: "3.5"
+
+networks:
+  dbs-demo-db-network:
+    name: dbs-demo-db-network
+    driver: bridge
+
+services:
+  dbs-db:
+    image: tomdale55/oracle12c-std-with-snapper
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
+    container_name: db1-swingbench-tpc-ds
+    ports: 
+      - "1521:1521"
+    networks: 
+      - dbs-demo-db-network
+    volumes:
+      - 
+    environment:
+      - DEBUG=false

@@ -48,7 +48,7 @@ docker-compose -f $COMPOSE_FILE up --force-recreate -d
 #
 # Needs to be in image
 #
-message 'install laravel/ui needed for auth - should be in dokcer image'
+message 'install laravel/ui needed for auth - should be in docker image TODO'
 run_core_cmd "composer require laravel/ui"
 #run_core_artisan_cmd ui:auth
 
@@ -89,6 +89,7 @@ run_core_cmd "rm -f /var/www/html/dbs/storage/logs/*.log"
 #
 # Versions
 #
+
 message "Laravel :"
 run_core_artisan_cmd --version
 message "PHP :"

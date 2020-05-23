@@ -37,10 +37,13 @@ RUN \
 
 RUN \
   composer global require "laravel/installer" && \
-  composer require laravel/ui --dev && \
-  composer create-project --prefer-dist laravel/laravel dbs && \
-  composer update --no-scripts
+  composer create-project --prefer-dist laravel/laravel dbs 
 
+RUN \
+  composer require laravel/ui 
+
+RUN \
+  composer update --no-scripts
 
 WORKDIR /var/www/html/dbs
 

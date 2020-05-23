@@ -36,16 +36,29 @@ RUN \
   php -r "unlink('composer-setup.php');" 
 
 RUN \
-  composer require "laravel/installer" && \
-  composer create-project --prefer-dist laravel/laravel dbs && \
+  composer require "laravel/installer"
+
+RUN \
+  composer create-project --prefer-dist laravel/laravel dbs 
+
+RUN \
   cd /var/www/html/dbs && \
-  composer require "laravel/ui" && \
+  composer require "laravel/ui" 
+
+RUN \
+  cd /var/www/html/dbs && \
   ./artisan --version && \
-  ./artisan ui:auth  && \
-  echo "0.54" > /var/www/html/dbs/dbs-version && \
-  chgrp -R www-data storage bootstrap/cache && \
-  chmod -R ug+rwx storage bootstrap/cache && \
-  /usr/local/bin/php -m && \
-  /usr/local/bin/php -version
+  ./artisan ui:auth
 
 WORKDIR /var/www/html/dbs
+
+RUN \
+  echo "0.54" > /var/www/html/dbs/dbs-version
+
+RUN \
+  chgrp -R www-data storage bootstrap/cache && \
+  chmod -R ug+rwx storage bootstrap/cache
+
+RUN \
+  /usr/local/bin/php -m && \
+  /usr/local/bin/php -version

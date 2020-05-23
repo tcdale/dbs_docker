@@ -48,15 +48,15 @@ docker-compose -f $COMPOSE_FILE up --force-recreate -d
 #
 # Needs to be in image
 #
-message 'install laravel/ui needed for auth - should be in docker image TODO'
-run_core_cmd "composer require laravel/ui"
+#message 'install laravel/ui needed for auth - should be in docker image TODO'
+#run_core_cmd "composer require laravel/ui"
 #run_core_artisan_cmd ui:auth
 
 #
 # Check for updates
 #
-message 'update all laravel components'
-run_core_cmd "composer update --no-scripts"
+#message 'update all laravel components'
+#run_core_cmd "composer update --no-scripts"
 
 
 #

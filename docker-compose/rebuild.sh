@@ -44,21 +44,6 @@ chmod 700 /root/dbs/code/dbs/app/support_files/*.php
 #
 message 'Compose create'
 docker-compose -f $COMPOSE_FILE up --force-recreate -d
-
-#
-# Needs to be in image
-#
-#message 'install laravel/ui needed for auth - should be in docker image TODO'
-#run_core_cmd "composer require laravel/ui"
-#run_core_artisan_cmd ui:auth
-
-#
-# Check for updates
-#
-#message 'update all laravel components'
-#run_core_cmd "composer update --no-scripts"
-
-
 #
 # New application key
 # the key with image needs replacing
@@ -81,15 +66,12 @@ docker exec -i $DBS_SNAPPER bash -c "echo '$REPO_PASSWORD' > .repo_pw.txt"
 #
 run_core_cmd "php wait_for_db_then_migrate.php"
 #
-# Fix permission
+# change password setting
 #
-run_core_cmd "chmod -R 775 /var/www/html/dbs/storage"
-run_core_cmd "chmod -R 775 /var/www/html/dbs/bootstrap/cache"
-run_core_cmd "rm -f /var/www/html/dbs/storage/logs/*.log"
+sed -i 's/min:8/min:6/g' /root/dbs/code/dbs/app/Http/Controllers/Auth/RegisterController.php
 #
 # Versions
 #
-
 message "Laravel :"
 run_core_artisan_cmd --version
 message "PHP :"

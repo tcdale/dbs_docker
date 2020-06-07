@@ -7,7 +7,7 @@ networks:
 
 services:
   dbs-db:
-    image: postgres:alpine
+    image: postgres:13-alpine
     logging:
       driver: "json-file"
       options:

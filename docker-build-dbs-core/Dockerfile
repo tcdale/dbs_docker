@@ -1,4 +1,4 @@
-from php:rc-fpm-alpine
+from php:fpm-alpine
 
 RUN \
  apk update && apk upgrade && \

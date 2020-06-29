@@ -16,6 +16,8 @@ function run_core_cmd {
 function run_core_artisan_cmd {
     run_core_cmd "php artisan $1"
 }
+docker pull tomdale55/dbs-core
+docker pull tomdale55/dbs-snapper
 #
 # What compose file?
 #

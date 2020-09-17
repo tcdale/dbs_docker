@@ -71,6 +71,8 @@ services:
       - ./sqlnet.ora:/usr/lib/oracle/18.3/client64/lib/network/admin/sqlnet.ora
       - /root/dbs/code/dbs_snapper:/opt/dbs-snapper
       - /root/dbs/logs/agent:/var/log/dbs-snapper   
+    environment:
+      - DBS_LOGGING=true
 
   dbs-web:
     image: nginx:alpine

@@ -68,5 +68,10 @@ USER root
 COPY entry-point.sh /root/
 COPY test_ora_connect.php /root/
 
+COPY *.php /opt/dbs-snapper/
+COPY inc /opt/dbs-snapper/
+COPY sql /opt/dbs-snapper/
+COPY sqlnet.ora /usr/lib/oracle/18.3/client64/lib/network/admin/sqlnet.ora
+
 WORKDIR /opt/dbs-snapper
 ENTRYPOINT ["/root/entry-point.sh"]

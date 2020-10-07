@@ -68,7 +68,7 @@ docker-compose -f $COMPOSE_FILE up --force-recreate -d
 #
 # Run the migration when the database is ready
 #
-run_core_cmd "php wait_for_db_then_migrate.php"
+#run_core_cmd "php wait_for_db_then_migrate.php"
 #
 # change password setting
 #

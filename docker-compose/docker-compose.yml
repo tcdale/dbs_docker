@@ -7,7 +7,7 @@ networks:
 
 services:
   dbs-db:
-    image: postgres:13-alpine
+    image: tomdale55/dbs-db
     logging:
       driver: "json-file"
       options:
@@ -19,7 +19,7 @@ services:
     networks: 
       - dbs-network
     volumes:
-      - ./db_post_create_scripts:/docker-entrypoint-initdb.d
+      #- ./db_post_create_scripts:/docker-entrypoint-initdb.d
       - /var/lib/docker/volumes/dbs_db:/var/lib/postgresql/data/pgdata
     environment:
       - DEBUG=false
@@ -41,7 +41,7 @@ services:
     depends_on: 
       - dbs-db
     volumes:
-      - /dev/null:/var/www/html/dbs/storage/logs
+      - /root/dbs/logs:/var/www/html/dbs/storage/logs
 
   dbs-snapper:
     image: tomdale55/dbs-snapper
@@ -58,7 +58,7 @@ services:
       - dbs-core
     entrypoint: /opt/dbs-snapper/dbs.php  
     volumes:
-      - /dev/null:/var/log/dbs-snapper   
+      - /root/dbs/logs:/var/log/dbs-snapper   
     environment:
       - DBS_LOGGING=true
       - APP_KEY=XHMx1P9OlMbexRKExMF4k8qXmIvonudg
@@ -83,7 +83,7 @@ services:
     working_dir: /var/www/html/dbs/public
     volumes:
       - ./certs:/etc/nginx/certs
-      - /dev/null:/var/log/nginx
+      - /root/dbs/logs:/var/log/nginx
 
 
 

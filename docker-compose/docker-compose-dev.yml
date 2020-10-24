@@ -46,13 +46,13 @@ services:
 #      - /root/dbs/code/dbs/app/support_files/wait_for_db_then_migrate.php:/var/www/html/dbs/wait_for_db_then_migrate.php
 #      - /root/dbs/code/dbs/public/index.php:/var/www/html/dbs/public/index.php
       - /root/dbs/code/dbs/routes:/var/www/html/dbs/routes
-#      - /root/dbs/code/dbs/resources:/var/www/html/dbs/resources
+      - /root/dbs/code/dbs/resources:/var/www/html/dbs/resources
       - /root/dbs/code/dbs/database/migrations:/var/www/html/dbs/database/migrations
-#      - /root/dbs/code/dbs/app/Classes:/var/www/html/dbs/app/Classes
+      - /root/dbs/code/dbs/app/Classes:/var/www/html/dbs/app/Classes
       - /root/dbs/code/dbs/app/sql:/var/www/html/dbs/app/sql
       - /root/dbs/code/dbs/app/Http/Controllers:/var/www/html/dbs/app/Http/Controllers
 #      - /root/dbs/code/dbs/app/Console/Kernel.php:/var/www/html/dbs/app/Console/Kernel.php
-#      - /root/dbs/logs/core:/var/www/html/dbs/storage/logs
+      - /root/dbs/logs/core:/var/www/html/dbs/storage/logs
 
   dbs-snapper:
     image: tomdale55/dbs-snapper
@@ -97,15 +97,15 @@ services:
     working_dir: /var/www/html/dbs/public
     volumes:
       - ./certs:/etc/nginx/certs
-#      - ./site.conf:/etc/nginx/conf.d/site.conf
-#      - /root/dbs/code/dbs/public/index.html:/var/www/html/dbs/public/index.html
-#      - /root/dbs/code/dbs/public/css:/var/www/html/dbs/public/css
+      - ./site.conf:/etc/nginx/conf.d/site.conf
+      - /root/dbs/code/dbs/public/index.html:/var/www/html/dbs/public/index.html
+      - /root/dbs/code/dbs/public/css:/var/www/html/dbs/public/css
       - /root/dbs/code/dbs/public/js:/var/www/html/dbs/public/js
-#      - /root/dbs/code/dbs/public/assets:/var/www/html/dbs/public/assets
-#      - /root/dbs/code/dbs/public/plugs:/var/www/html/dbs/public/plugs
-#      - /root/dbs/code/dbs/public/fonts:/var/www/html/dbs/public/fonts
-#      - /root/dbs/code/dbs/public/favicon.ico:/var/www/html/dbs/public/favicon.ico
-#      - /root/dbs/logs/web:/var/log/nginx
+      - /root/dbs/code/dbs/public/assets:/var/www/html/dbs/public/assets
+      - /root/dbs/code/dbs/public/plugs:/var/www/html/dbs/public/plugs
+      - /root/dbs/code/dbs/public/fonts:/var/www/html/dbs/public/fonts
+      - /root/dbs/code/dbs/public/favicon.ico:/var/www/html/dbs/public/favicon.ico
+      - /root/dbs/logs/web:/var/log/nginx
 
 
 

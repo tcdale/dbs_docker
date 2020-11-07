@@ -7,7 +7,7 @@ networks:
 
 services:
   dbs-db:
-    image: postgres:13-alpine
+    image: tomdale55/dbs-db
     logging:
       driver: "json-file"
       options:
@@ -19,7 +19,7 @@ services:
     networks: 
       - dbs-network
     volumes:
-      - ./db_post_create_scripts:/docker-entrypoint-initdb.d
+#      - ./db_post_create_scripts:/docker-entrypoint-initdb.d
       - /var/lib/docker/volumes/dbs_db:/var/lib/postgresql/data/pgdata
     environment:
       - DEBUG=false

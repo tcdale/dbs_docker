@@ -1,0 +1,89 @@
+version: "3.5"
+
+networks:
+  dbs-network:
+    name: dbs-network
+    driver: bridge
+
+services:
+  dbs-db:
+    image: quay.io/fivium/dbs-db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
+    container_name: dbs-db
+    ports: 
+      - "5432:5432"
+    networks: 
+      - dbs-network
+    volumes:
+      - /var/lib/docker/volumes/dbs_db:/var/lib/postgresql/data/pgdata
+    environment:
+      - DEBUG=false
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_USER=dbs_user
+      - POSTGRES_PASSWORD=dbs_password
+      - POSTGRES_DB=dbs_db
+
+  dbs-core:
+    image: quay.io/fivium/dbs-core
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
+    container_name: dbs-core
+    networks: 
+      - dbs-network
+    depends_on: 
+      - dbs-db
+    volumes:
+      - /root/dbs/logs:/var/www/html/dbs/storage/logs
+
+  dbs-snapper:
+    image: quay.io/fivium/dbs-snapper
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
+    container_name: dbs-snapper
+    networks: 
+      - dbs-network
+    depends_on: 
+      - dbs-db
+      - dbs-core
+    entrypoint: /opt/dbs-snapper/dbs.php  
+    volumes:
+      - /root/dbs/logs:/var/log/dbs-snapper
+    environment:
+      - DBS_LOGGING=false
+      - APP_KEY=XHMx1P9OlMbexRKExMF4k8qXmIvonudg
+      - REPO_PW=dbs_password
+
+  dbs-web:
+    image: quay.io/fivium/dbs-web
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50k"
+        max-file: "10"
+    container_name: dbs-web
+    networks: 
+      - dbs-network
+    depends_on: 
+      - dbs-db
+      - dbs-core
+    ports:
+      - "80:80"
+      - "443:443"
+    working_dir: /var/www/html/dbs/public
+    volumes:
+      - /root/dbs/logs:/var/log/nginx
+
+
+
+
+

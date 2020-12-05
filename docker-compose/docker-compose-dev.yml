@@ -51,7 +51,8 @@ services:
       - /root/dbs/code/dbs/app/Classes:/var/www/html/dbs/app/Classes
       - /root/dbs/code/dbs/app/sql:/var/www/html/dbs/app/sql
       - /root/dbs/code/dbs/app/Http/Controllers:/var/www/html/dbs/app/Http/Controllers
-#      - /root/dbs/code/dbs/app/Console/Kernel.php:/var/www/html/dbs/app/Console/Kernel.php
+      - /root/dbs/code/dbs/app/Console/Kernel.php:/var/www/html/dbs/app/Console/Kernel.php
+      - /root/dbs/code/dbs/app/Notifications:/var/www/html/dbs/app/Notifications
       - /root/dbs/logs/core:/var/www/html/dbs/storage/logs
 
   dbs-snapper:
@@ -72,11 +73,12 @@ services:
       #- /root/dbs/code/dbs_snapper/.app_key.txt:/opt/dbs-snapper/.app_key.txt
       #- /root/dbs/code/dbs_snapper/.repo_pw.txt:/opt/dbs-snapper/.repo_pw.txt
       - /root/dbs/code/dbs_snapper:/opt/dbs-snapper
+      - /root/dbs/process-snaps:/opt/dbs-snapper/process-snaps  
       - /root/dbs/logs/agent:/var/log/dbs-snapper   
     environment:
       - DBS_LOGGING=true
       - APP_KEY=XHMx1P9OlMbexRKExMF4k8qXmIvonudg
-      - REPO_PW=dbs_password
+      - REPO_PW=SaLpoECIiEmSNgC6hFPKHw==
 
   dbs-web:
     image: tomdale55/dbs-web

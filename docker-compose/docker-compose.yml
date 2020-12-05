@@ -58,11 +58,12 @@ services:
       - dbs-core
     entrypoint: /opt/dbs-snapper/dbs.php  
     volumes:
-      - /root/dbs/logs:/var/log/dbs-snapper   
+      - /root/dbs/logs:/var/log/dbs-snapper 
+      - /root/dbs/process-snaps:/opt/dbs-snapper/process-snaps  
     environment:
       - DBS_LOGGING=true
       - APP_KEY=XHMx1P9OlMbexRKExMF4k8qXmIvonudg
-      - REPO_PW=dbs_password
+      - REPO_PW=SaLpoECIiEmSNgC6hFPKHw==
 
   dbs-web:
     image: tomdale55/dbs-web

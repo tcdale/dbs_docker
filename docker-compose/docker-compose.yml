@@ -42,6 +42,7 @@ services:
       - dbs-db
     volumes:
       - /root/dbs/logs:/var/www/html/dbs/storage/logs
+      - /root/dbs/process-snaps:/var/www/html/dbs/storage/app/process-snaps
 
   dbs-snapper:
     image: tomdale55/dbs-snapper

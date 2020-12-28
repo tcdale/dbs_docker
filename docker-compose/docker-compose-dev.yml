@@ -55,6 +55,7 @@ services:
       - /root/dbs/code/dbs/app/Notifications:/var/www/html/dbs/app/Notifications
       - /root/dbs/logs/core:/var/www/html/dbs/storage/logs
       - /root/dbs/process-snaps:/var/www/html/dbs/storage/app/process-snaps
+      - /root/dbs/perf-snaps:/var/www/html/dbs/storage/app/perf-snaps
 
   dbs-snapper:
     image: tomdale55/dbs-snapper

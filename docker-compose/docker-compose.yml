@@ -19,8 +19,7 @@ services:
     networks: 
       - dbs-network
     volumes:
-      #- ./db_post_create_scripts:/docker-entrypoint-initdb.d
-      - /var/lib/docker/volumes/dbs_db:/var/lib/postgresql/data/pgdata
+      - /home/dbs/db:/var/lib/postgresql/data/pgdata
     environment:
       - DEBUG=false
       - PGDATA=/var/lib/postgresql/data/pgdata
@@ -41,9 +40,9 @@ services:
     depends_on: 
       - dbs-db
     volumes:
-      - /root/dbs/logs:/var/www/html/dbs/storage/logs
-      - /root/dbs/process-snaps:/var/www/html/dbs/storage/app/process-snaps
-      - /root/dbs/perf-snaps:/var/www/html/dbs/storage/app/perf-snaps
+      - /home/dbs/logs:/var/www/html/dbs/storage/logs
+      - /home/dbs/process-snaps:/var/www/html/dbs/storage/app/process-snaps
+      - /home/dbs/perf-snaps:/var/www/html/dbs/storage/app/perf-snaps
 
   dbs-snapper:
     image: tomdale55/dbs-snapper
@@ -60,8 +59,8 @@ services:
       - dbs-core
     entrypoint: /opt/dbs-snapper/dbs.php  
     volumes:
-      - /root/dbs/logs:/var/log/dbs-snapper 
-      - /root/dbs/process-snaps:/opt/dbs-snapper/process-snaps  
+      - /home/dbs/logs:/var/log/dbs-snapper 
+      - /home/dbs/process-snaps:/opt/dbs-snapper/process-snaps  
     environment:
       - DBS_LOGGING=true
       - APP_KEY=XHMx1P9OlMbexRKExMF4k8qXmIvonudg
@@ -86,7 +85,7 @@ services:
     working_dir: /var/www/html/dbs/public
     volumes:
     #  - ./certs:/etc/nginx/certs
-      - /root/dbs/logs:/var/log/nginx
+      - /home/dbs/logs:/var/log/nginx
 
 
 

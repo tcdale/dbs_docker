@@ -102,6 +102,7 @@ services:
       - /home/dbs/code/dbs/public/plugs:/var/www/html/dbs/public/plugs
       - /home/dbs/code/dbs/public/fonts:/var/www/html/dbs/public/fonts
       - /home/dbs/code/dbs/public/favicon.ico:/var/www/html/dbs/public/favicon.ico
+      - /home/dbs/code/dbs/public/softwerks:/var/www/html/dbs/public/softwerks
       - /home/dbs/logs:/var/log/nginx
 
 
